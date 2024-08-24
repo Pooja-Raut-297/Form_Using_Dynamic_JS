@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-Using-Append-Child</title>
+</head>
+<style>
+    section{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        margin-top: 60px;
+    }
+    .box1{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        box-shadow: 0 0 10px gray;
+        padding: 20px;
+        padding-bottom: 30px;
+        border-radius: 20px;
+    }
+    label{
+        padding: 10px 0;
+    }
+    input{
+        padding: 10px 0;
+    }
+    select{
+        padding: 10px;
+    }
+    button{
+        margin-top: 15px;
+        padding: 10px;
+        background-color: plum;
+        border: none;
+        border-radius: 12px;
+        font-size: 17px;
+    }
+    .submit_hide{
+        display: none;
+    }
+    .box2{
+        display: flex;
+        flex-direction: column;
+    }
+    p{
+        box-shadow: 0 0 10px gray;
+        padding: 20px 60px;
+        margin-top: 100px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 10px;
+        line-height: 40px;
+    }
+    
+</style>
+<body>
+    <script>
+        let body = document.getElementsByTagName('body')[0];       //jitane bhi chize hai wo body mai jayengi
+
+        let section = document.createElement('section');    //creates a section
+        body.appendChild(section);                          //body ke aanadar section ko dala
+
+        //DIV-1
+        let div1 = document.createElement('div');
+        div1.setAttribute('class','box1');                  //sets attributes 
+        section.appendChild(div1);
+
+        let heading = document.createElement('h1');
+        let heading_txt = document.createTextNode('Information Form');
+        heading.appendChild(heading_txt);
+        div1.appendChild(heading);
+
+        let label_one = document.createElement('label');             //creates label
+        let label_one_txt = document.createTextNode('Enter Name:');
+        label_one.appendChild(label_one_txt);
+        console.log(label_one);
+        div1.appendChild(label_one);
+
+        let input_one = document.createElement('input');   //creates input 
+        input_one.setAttribute('placeholder','enter name here','onclick','data(value)');   //sets attributes inside input
+        div1.appendChild(input_one);
+
+        let label_two = document.createElement('label');
+        let label_two_txt = document.createTextNode('Enter Address:');
+        label_two.appendChild(label_two_txt);
+        console.log(label_two)
+        div1.appendChild(label_two);
+
+        let input_two = document.createElement('input');
+        input_two.setAttribute('placeholder','enter address here','onclick','data(value)');
+        div1.appendChild(input_two);
+
+        let label_three = document.createElement('label');
+        let label_three_txt = document.createTextNode('Enter Email:')
+        label_three.appendChild(label_three_txt);
+        console.log(label_three);
+        div1.appendChild(label_three);
+
+        let input_three = document.createElement('input');
+        input_three.setAttribute('placeholder','enter email here','onclick','data(value)');
+        div1.appendChild(input_three)
+
+        let label_four = document.createElement('label');
+        let label_four_txt = document.createTextNode('Enter Phone No:');
+        label_four.appendChild(label_four_txt);
+        console.log(label_four);
+        div1.appendChild(label_four);
+
+        let input_four = document.createElement('input');
+        input_four.setAttribute('placeholder','enter phone no here','onclick','data(value)');
+        div1.appendChild(input_four);
+
+        let label_five = document.createElement('label');
+        label_five_txt = document.createTextNode('Education Details:');
+        label_five.appendChild(label_five_txt);
+        console.log(label_five);
+        div1.appendChild(label_five);
+
+        //DROP-DOWN-LIST
+        let select = document.createElement('select');
+
+        let option1 = document.createElement('option');
+        let option_txt = document.createTextNode('select education');
+        option1.appendChild(option_txt);
+        select.appendChild(option1)
+
+        let option2 = document.createElement('option');
+        let option_two_txt = document.createTextNode('BE');
+        option2.appendChild(option_two_txt);
+        select.appendChild(option2);
+
+        let option3 = document.createElement('option');
+        let option_three_txt = document.createTextNode('BSC');
+        option3.appendChild(option_three_txt);
+        select.appendChild(option3);
+
+        div1.appendChild(select);
+
+
+        //CREATES BTN
+        let btn1 = document.createElement('button');
+        btn1.setAttribute('onclick','submit()');
+        let btn_one_txt = document.createTextNode('Submit');
+        btn1.appendChild(btn_one_txt);
+        console.log(btn1);
+        div1.appendChild(btn1);
+
+
+        let database = [];
+
+        function submit(){
+            let name = document.getElementsByTagName('input')[0].value;
+            let address = document.getElementsByTagName('input')[1].value;
+            let email = document.getElementsByTagName('input')[2].value;
+            let phoneNo = document.getElementsByTagName('input')[3].value;
+            let education = document.getElementsByTagName('select')[0].value;
+
+            let obj = {
+                's_name' : name,
+                'address' : address,
+                'email' : email,
+                'phonNo' : phoneNo,
+                'educ' : education
+            }
+
+            database.push(obj);
+            console.log(database);
+
+            div1.setAttribute('class','submit_hide');
+
+            id_card();
+
+        }
+
+        function id_card(){
+        let div2 = document.createElement('div');
+        div2.setAttribute('class','box2');
+        section.appendChild(div2);
+
+        let para1 = document.createElement('p');
+        div2.appendChild(para1);
+
+        let headingCard = document.createElement('h1');
+        let heading_text = document.createTextNode('Enterd Information');
+        headingCard.appendChild(heading_text);
+        para1.appendChild(headingCard);
+
+        let para_txt1 = document.createTextNode(`Name: ${database[0].s_name}`);
+        let para_txt2 = document.createTextNode(`Address: ${database[0].address}`);
+        let para_txt3 = document.createTextNode(`Email: ${database[0].email}`);
+        let para_txt4 = document.createTextNode(`PhoneNo: ${database[0].phonNo}`);
+        let para_txt5 = document.createTextNode(`Eductaion: ${database[0].educ}`);
+
+        para1.appendChild(para_txt1);
+        let br1 = document.createElement('br');
+        para1.appendChild(br1);
+
+        para1.appendChild(para_txt2);
+        let br2 = document.createElement('br');
+        para1.appendChild(br2);
+
+        para1.appendChild(para_txt3);
+        let br3 = document.createElement('br');
+        para1.appendChild(br3);
+
+        para1.appendChild(para_txt4);
+        let br4 = document.createElement('br');
+        para1.appendChild(br4);
+
+        para1.appendChild(para_txt5);
+        let br5 = document.createElement('br');
+        para1.appendChild(br5);
+        }
+    </script>
+</body>
+</html>
